@@ -1,0 +1,40 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Build output / logs
+build/
+node_modules/
+*.log
+
+# Working notes
+tasks/
+AGENTS.md
+
+# Calibration output (machine-specific)
+training/samples.csv
+training/model.json
+
+# Held back: controller embeds meshes of the third-party arm design (license unconfirmed)
+controller/
+
+# Held back: photos and clips (embedded metadata to resolve; some show personal details
+# or belong to another project)
+media/
+
+# Third-party design files are never committed
+*.stl
+*.3mf
+*.step
+*.stp
+*.f3d
+*.blend
