@@ -1,29 +1,30 @@
 # 180° - 6-DOF robot arm with camera calibration
 
-A 6-DOF servo arm with a gripper, built from fabricreator's arm design on Cults3D and driven by an Arduino Uno. This repository holds the control side: the Arduino sketch that drives the eight servos over serial, and a camera calibration script. The script uses OpenCV to find a coloured marker on the gripper while the arm steps through joint angles, fits a least-squares model from joint angles to camera pixels, and then lets you click a point in the camera view so the arm moves there. A browser controller called **180°** (three.js 3D view, Web Serial, pose sequencer) was also built for this arm; it is not in this repository yet (see Status).
+A 6-DOF servo arm with a gripper, built from FABRI Creator's [Brazo Robótico 5.0](https://fabricreator.com/products/kit-brazo-robotico-5-0-fabri-creator) and driven by an Arduino Uno. This repository holds the control side: the Arduino sketch that drives the eight servos over serial, and a camera calibration script. The script uses OpenCV to find a coloured marker on the gripper while the arm steps through joint angles, fits a least-squares model from joint angles to camera pixels, and then lets you click a point in the camera view so the arm moves there. A browser controller called **180°** (three.js 3D view, Web Serial, pose sequencer) was also built for this arm; it is not in this repository (see Status).
 
 Built by Gio ([Built-By-Gio](https://github.com/Built-By-Gio)).
+
+![My arm on a table](photos/arm_8.jpg)
 
 ## Status (2026-11-25)
 
 **Built and working**
-- The arm is printed, assembled and wired to an Arduino Uno, with all joints moving. Photos and a clip of the 180° controller page driving the real arm are not in this repository yet.
+- The arm is printed, assembled and wired to an Arduino Uno, with all joints moving. Photos of the arm and of the 180° controller page are in `photos/`. The clip of the controller driving the arm is not in this repository.
 - Camera calibration and click-to-move worked on the real arm on 2026-10-20.
 
 **Rewritten in November 2026**
 - The original Arduino sketch and the original calibration script are on another computer. `firmware/arm_serial/arm_serial.ino` and `training/train.py` in this repository were rewritten to match the controller's serial protocol and channel map, and they run on the real arm.
 
 **Not in this repository yet**
-- The 180° browser controller (`controller/index.html`). Its 3D view embeds arm meshes exported from a Blender model of the arm, and I have not checked the license of fabricreator's design yet, so I am holding the file back until that is settled.
-- The printable arm files. They belong to fabricreator and must be obtained from the designer on Cults3D.
+- The 180° browser controller (`controller/index.html`). Its 3D view embeds the arm's meshes, and FABRI Creator's files may not be shared publicly, so I keep the controller out of this repo.
+- The printable arm files. They are sold by FABRI Creator for personal and educational use, so they are not included here.
 
 **Still to add**
 - Servo models, power supply rating and print settings.
-- The exact Cults3D page and license of the arm design.
 
 ## What you need
 
-- The printed arm from fabricreator's design on Cults3D (get the files from the designer).
+- The printed arm from FABRI Creator's [Brazo Robótico 5.0](https://fabricreator.com/products/kit-brazo-robotico-5-0-fabri-creator) (buy the files from FABRI Creator).
 - 8 hobby servos on 7 joints (the shoulder uses two servos, mirrored).
 - Arduino Uno and a USB cable.
 - A separate 5-6 V supply for the servos. Do not power them from the Uno's 5 V pin; tie the grounds together.
@@ -48,7 +49,7 @@ The serial protocol is one `<channel> <angle>` line per command at 9600 baud, fo
 
 ## How to build / run
 
-1. Print and assemble the arm following fabricreator's instructions.
+1. Print and assemble the arm following FABRI Creator's instructions.
 2. Wire the servo signal leads to pins 2-9 as in the table, and power the servos from their own 5-6 V supply with a common ground.
 3. Open `firmware/arm_serial/arm_serial.ino` in the Arduino IDE, select **Arduino Uno** and the right port, and upload. On boot every servo goes to its "straight" angle and the board prints `ready`.
 4. Install the Python packages: `pip install opencv-python numpy pyserial`.
@@ -65,6 +66,7 @@ The serial protocol is one `<channel> <angle>` line per command at 9600 baud, fo
 |---|---|
 | `firmware/arm_serial/arm_serial.ino` | Arduino sketch: reads `<channel> <angle>` lines and writes them to 8 servos |
 | `training/train.py` | Camera calibration: collect, fit, click |
+| `photos/` | Photos of the arm and the controller page |
 
 ## Roadmap / future plans
 
@@ -77,8 +79,8 @@ The serial protocol is one `<channel> <angle>` line per command at 9600 baud, fo
 
 ## Credits and license
 
-- Mechanical arm design: **fabricreator** on Cults3D. The printable files are not included here; obtain them from the designer and follow the designer's license.
+- Mechanical arm design: **FABRI Creator**, [Brazo Robótico 5.0](https://fabricreator.com/products/kit-brazo-robotico-5-0-fabri-creator) ([YouTube](https://www.youtube.com/@FABRIcreator)). The printable files are not included here; they are sold by FABRI Creator for personal and educational use.
 - Uses OpenCV, NumPy, pyserial and the Arduino Servo library (installed separately, not included).
 - The 180° controller uses three.js r128 (MIT) and anime.js, loaded from a CDN.
 
-The code in this repository is released under the MIT License (see `LICENSE`). The license does not cover fabricreator's design.
+The code in this repository is released under the MIT License (see `LICENSE`). The license does not cover FABRI Creator's design.
