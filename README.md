@@ -29,7 +29,7 @@ Built by Gio ([Built-By-Gio](https://github.com/Built-By-Gio)).
 - A separate 5-6 V supply for the servos. Do not power them from the Uno's 5 V pin; tie the grounds together.
 - A webcam and a pink marker (tape) on the gripper, for calibration.
 - Arduino IDE (the Servo library ships with it).
-- Python 3 (the script was checked with 3.13) and the packages `opencv-python`, `numpy` and `pyserial`.
+- Python 3 (I use 3.13) and the packages `opencv-python`, `numpy` and `pyserial`.
 
 ### Wiring
 
