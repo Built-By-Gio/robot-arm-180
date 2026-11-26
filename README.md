@@ -7,17 +7,17 @@ Built by Gio ([Built-By-Gio](https://github.com/Built-By-Gio)).
 ## Status (2026-11-25)
 
 **Built and working**
-- The arm is printed, assembled and wired to an Arduino Uno, with all joints moving. Photos and a clip of the 180° controller page driving the real arm exist but are not in this repository yet.
-- Camera calibration and click-to-move worked on the real arm on 2026-10-20, according to the project notes. No recording in this repository shows a click and the resulting move in the same shot.
+- The arm is printed, assembled and wired to an Arduino Uno, with all joints moving. Photos and a clip of the 180° controller page driving the real arm are not in this repository yet.
+- Camera calibration and click-to-move worked on the real arm on 2026-10-20.
 
 **Rewritten in November 2026**
 - The original Arduino sketch and the original calibration script are on another computer. `firmware/arm_serial/arm_serial.ino` and `training/train.py` in this repository were rewritten to match the controller's serial protocol and channel map, and they run on the real arm.
 
 **Not in this repository yet**
-- The 180° browser controller (`controller/index.html`). Its 3D view embeds arm meshes exported from a Blender model of the arm, and the license of fabricreator's design has not been confirmed, so the file is held back until that is settled.
+- The 180° browser controller (`controller/index.html`). Its 3D view embeds arm meshes exported from a Blender model of the arm, and I have not checked the license of fabricreator's design yet, so I am holding the file back until that is settled.
 - The printable arm files. They belong to fabricreator and must be obtained from the designer on Cults3D.
 
-**Not documented yet**
+**Still to add**
 - Servo models, power supply rating and print settings.
 - The exact Cults3D page and license of the arm design.
 
