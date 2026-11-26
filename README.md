@@ -6,10 +6,14 @@ Built by Gio ([Built-By-Gio](https://github.com/Built-By-Gio)).
 
 ![My arm on a table](photos/arm_8.jpg)
 
+![My arm moving on a table](video/arm_demo.gif)
+
+*My arm moving through different poses on a table.* [Watch the full 25-second clip](video/arm_demo.mp4)
+
 ## Status (2026-11-25)
 
 **Built and working**
-- The arm is printed, assembled and wired to an Arduino Uno, with all joints moving. Photos of the arm and of the 180° controller page are in `photos/`. The clip of the controller driving the arm is not in this repository.
+- The arm is printed, assembled and wired to an Arduino Uno, with all joints moving. Photos of the arm and of the 180° controller page are in `photos/`. A 25-second clip of the arm moving is in `video/`.
 - Camera calibration and click-to-move worked on the real arm on 2026-10-20.
 
 **Rewritten in November 2026**
@@ -67,6 +71,7 @@ The serial protocol is one `<channel> <angle>` line per command at 9600 baud, fo
 | `firmware/arm_serial/arm_serial.ino` | Arduino sketch: reads `<channel> <angle>` lines and writes them to 8 servos |
 | `training/train.py` | Camera calibration: collect, fit, click |
 | `photos/` | Photos of the arm and the controller page |
+| `video/` | `arm_demo.mp4` (25-second clip of the arm moving, no sound) and `arm_demo.gif` (8-second preview) |
 
 ## Roadmap / future plans
 
