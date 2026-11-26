@@ -71,7 +71,7 @@ The serial protocol is one `<channel> <angle>` line per command at 9600 baud, fo
 | `firmware/arm_serial/arm_serial.ino` | Arduino sketch: reads `<channel> <angle>` lines and writes them to 8 servos |
 | `training/train.py` | Camera calibration: collect, fit, click |
 | `photos/` | Photos of the arm and the controller page |
-| `video/` | `arm_demo.mp4` (25-second clip of the arm moving, no sound) and `arm_demo.gif` (8-second preview) |
+| `video/` | `arm_demo.mp4` (25-second clip of the arm moving) and `arm_demo.gif` (8-second preview) |
 
 ## Roadmap / future plans
 
