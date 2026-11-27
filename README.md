@@ -1,6 +1,6 @@
 # 180° - 6-DOF robot arm with camera calibration
 
-A 6-DOF servo arm with a gripper, built from FABRI Creator's [Brazo Robótico 5.0](https://fabricreator.com/products/kit-brazo-robotico-5-0-fabri-creator) and driven by an Arduino Uno. This repository holds the control side: the Arduino sketch that drives the eight servos over serial, and a camera calibration script. The script uses OpenCV to find a coloured marker on the gripper while the arm steps through joint angles, fits a least-squares model from joint angles to camera pixels, and then lets you click a point in the camera view so the arm moves there. A browser controller called **180°** (three.js 3D view, Web Serial, pose sequencer) was also built for this arm; it is not in this repository (see Status).
+A 6-DOF servo arm with a gripper, built from FABRI Creator's [Brazo Robótico 5.0](https://fabricreator.com/products/kit-brazo-robotico-5-0-fabri-creator) and driven by an Arduino Uno. This repository holds the control side: a browser controller called **180°**, the Arduino sketch that drives the eight servos over serial, and a camera calibration script. The script uses OpenCV to find a coloured marker on the gripper while the arm steps through joint angles, fits a least-squares model from joint angles to camera pixels, and then lets you click a point in the camera view so the arm moves there.
 
 Built by Gio ([Built-By-Gio](https://github.com/Built-By-Gio)).
 
@@ -14,14 +14,14 @@ Built by Gio ([Built-By-Gio](https://github.com/Built-By-Gio)).
 
 **Built and working**
 - The arm is printed, assembled and wired to an Arduino Uno, with all joints moving. Photos of the arm and of the 180° controller page are in `photos/`. A 25-second clip of the arm moving is in `video/`.
+- The 180° browser controller (`controller/index.html`) drives the real arm over USB from Chrome.
 - Camera calibration and click-to-move worked on the real arm on 2026-10-20.
 
 **Rewritten in November 2026**
 - The original Arduino sketch and the original calibration script are on another computer. `firmware/arm_serial/arm_serial.ino` and `training/train.py` in this repository were rewritten to match the controller's serial protocol and channel map, and they run on the real arm.
 
 **Not in this repository yet**
-- The 180° browser controller (`controller/index.html`). Its 3D view embeds the arm's meshes, and FABRI Creator's files may not be shared publicly, so I keep the controller out of this repo.
-- The printable arm files. They are sold by FABRI Creator for personal and educational use, so they are not included here.
+- The printable arm files (STL). They are sold by FABRI Creator and are not on this computer, so they are not included here.
 
 **Still to add**
 - Servo models, power supply rating and print settings.
@@ -34,6 +34,7 @@ Built by Gio ([Built-By-Gio](https://github.com/Built-By-Gio)).
 - A separate 5-6 V supply for the servos. Do not power them from the Uno's 5 V pin; tie the grounds together.
 - A webcam and a pink marker (tape) on the gripper, for calibration.
 - Arduino IDE (the Servo library ships with it).
+- Chrome or Edge on a desktop for the 180° controller (it uses Web Serial). The page loads three.js and anime.js from a CDN, so it needs an internet connection.
 - Python 3 (I use 3.13) and the packages `opencv-python`, `numpy` and `pyserial`.
 
 ### Wiring
@@ -50,6 +51,19 @@ Built by Gio ([Built-By-Gio](https://github.com/Built-By-Gio)).
 | 7 | 9 | Base | 90 |
 
 The serial protocol is one `<channel> <angle>` line per command at 9600 baud, for example `7 90`.
+
+## The 180° controller
+
+`controller/index.html` is a single page that runs in the browser. It has:
+
+- a live 3D view of the arm (drag to orbit, scroll to zoom, double-click to reset);
+- one slider per joint (base, shoulder, elbow, forearm, forearm 2, wrist, gripper) plus a speed slider;
+- a pose sequencer: save poses (S), play (Space), stop (Esc), a flow mode that glides through the poses instead of stopping at each one, and CSV import and export;
+- presets that load into the sequence: pick and place, palletize, weld seam, inspection scan, screw driving, home and park;
+- a servo setup panel that sets which joint each channel drives, reversal and trim, and saves the current pose as 90°;
+- a simulator mode for trying moves without the arm plugged in, and a console log.
+
+To use it with the arm: flash the firmware (step 3 below), plug the Uno in over USB, open `controller/index.html` in Chrome or Edge, click **Connect arm** and pick the Uno's port. The page talks to the Arduino at 9600 baud. Settings and saved poses stay in the browser's local storage.
 
 ## How to build / run
 
@@ -68,6 +82,7 @@ The serial protocol is one `<channel> <angle>` line per command at 9600 baud, fo
 
 | Path | Contents |
 |---|---|
+| `controller/index.html` | The 180° browser controller (single file, includes the arm's 3D model) |
 | `firmware/arm_serial/arm_serial.ino` | Arduino sketch: reads `<channel> <angle>` lines and writes them to 8 servos |
 | `training/train.py` | Camera calibration: collect, fit, click |
 | `photos/` | Photos of the arm and the controller page |
@@ -84,8 +99,8 @@ The serial protocol is one `<channel> <angle>` line per command at 9600 baud, fo
 
 ## Credits and license
 
-- Mechanical arm design: **FABRI Creator**, [Brazo Robótico 5.0](https://fabricreator.com/products/kit-brazo-robotico-5-0-fabri-creator) ([YouTube](https://www.youtube.com/@FABRIcreator)). The printable files are not included here; they are sold by FABRI Creator for personal and educational use.
+- Mechanical arm design: **FABRI Creator**, [Brazo Robótico 5.0](https://fabricreator.com/products/kit-brazo-robotico-5-0-fabri-creator) ([YouTube](https://www.youtube.com/@FABRIcreator)). The arm's 3D model shown in the controller is FABRI Creator's Brazo Robótico 5.0, included with FABRI Creator's permission (given PERMISSION_DATE). The printable STL files are not included here; they are sold by FABRI Creator.
 - Uses OpenCV, NumPy, pyserial and the Arduino Servo library (installed separately, not included).
-- The 180° controller uses three.js r128 (MIT) and anime.js, loaded from a CDN.
+- The 180° controller loads three.js r128 (MIT) and anime.js 3.2.2 (MIT) from cdnjs.cloudflare.com, and the Anton and IBM Plex Mono fonts from Google Fonts.
 
-The code in this repository is released under the MIT License (see `LICENSE`). The license does not cover FABRI Creator's design.
+My code in this repository is released under the MIT License (see `LICENSE`). The arm's 3D model data inside `controller/index.html` belongs to FABRI Creator and is not covered by the MIT License, and neither is FABRI Creator's arm design.
