@@ -99,7 +99,7 @@ To use it with the arm: flash the firmware (step 3 below), plug the Uno in over 
 
 ## Credits and license
 
-- Mechanical arm design: **FABRI Creator**, [Brazo Robótico 5.0](https://fabricreator.com/products/kit-brazo-robotico-5-0-fabri-creator) ([YouTube](https://www.youtube.com/@FABRIcreator)). The arm's 3D model shown in the controller is FABRI Creator's Brazo Robótico 5.0, included with FABRI Creator's permission (given PERMISSION_DATE). The printable STL files are not included here; they are sold by FABRI Creator.
+- Mechanical arm design: **FABRI Creator**, [Brazo Robótico 5.0](https://fabricreator.com/products/kit-brazo-robotico-5-0-fabri-creator) ([YouTube](https://www.youtube.com/@FABRIcreator)). The arm's 3D model shown in the controller is FABRI Creator's Brazo Robótico 5.0, included with FABRI Creator's permission (given 2026-11-26). The printable STL files are not included here; they are sold by FABRI Creator.
 - Uses OpenCV, NumPy, pyserial and the Arduino Servo library (installed separately, not included).
 - The 180° controller loads three.js r128 (MIT) and anime.js 3.2.2 (MIT) from cdnjs.cloudflare.com, and the Anton and IBM Plex Mono fonts from Google Fonts.
 
